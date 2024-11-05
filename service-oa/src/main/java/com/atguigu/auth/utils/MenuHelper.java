@@ -21,8 +21,12 @@ public class MenuHelper {
      */
     public static List<SysMenu> buildTree(List<SysMenu> sysMenuList){
         List<SysMenu> trees = new ArrayList<>();
+//        把所有菜单数据进行遍历
         for (SysMenu sysMenu : sysMenuList){
+//            递归入口进入
+//            parentId = 0 是入口
             if (sysMenu.getParentId().longValue() == 0){
+//                开始递归
                 trees.add(findChildren(sysMenu,sysMenuList));
             }
         }
@@ -38,6 +42,7 @@ public class MenuHelper {
      */
     public static SysMenu findChildren(SysMenu sysMenu,List<SysMenu> treeNodes){
         sysMenu.setChildren(new ArrayList<SysMenu>());
+//        遍历所有菜单数据 判断 id 和 parentId对应关系
         for (SysMenu it : treeNodes){
             if (sysMenu.getId().longValue() == it.getParentId().longValue()){
                 if (sysMenu.getChildren() == null){
